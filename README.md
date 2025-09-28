@@ -1,24 +1,33 @@
-# Next.js Blog (Satoru Foundation assignment)
+# Manohar_WebDev_Assignment
 
-**What this is:**  
-A dynamic blog platform built with Next.js + MongoDB. It includes REST API routes, a paginated searchable homepage, dynamic post pages, and a simple admin UI for creating/editing posts with a rich text editor.
+## Project Overview
+This is a **dynamic blog platform** built using **Next.js** and **MongoDB**. It features:  
+
+- Homepage with paginated posts and search functionality  
+- Individual post pages (`/blog/[slug]`)  
+- Admin interface for **creating, updating, deleting posts** using a rich text editor (`react-quill`)  
+- REST API endpoints for posts  
+- Image support via URLs  
+
+The project demonstrates **full-stack development skills** using modern JavaScript frameworks and a NoSQL database.
+
+---
 
 ## Features
-- Homepage with paginated posts
-- Dynamic post page (`/blog/[slug]`)
-- REST API: `GET /api/blogs`, `GET /api/blogs/[slug]`, `POST /api/blogs`, `PUT /api/blogs/[slug]`, `DELETE /api/blogs/[slug]`
-- Search and tag filtering
-- Admin UI for create/update/delete (rich text editor using `react-quill`)
-- Image support (via image URLs) — instructions below for uploading to Cloudinary or local hosting.
 
-## Stack
-- Next.js (React)
-- MongoDB via Mongoose
-- react-quill (rich text editor)
-- Axios for client-side API calls
+- Dynamic paginated homepage  
+- Single post pages with SSR (server-side rendering)  
+- Admin panel for CRUD operations  
+- Tag-based filtering and search  
+- MongoDB integration via Mongoose  
+- Rich-text editor for post content  
+- Image support via URLs  
 
-## Setup (local)
-1. Clone this repo:
-   ```bash
-   git clone <your-repo-url>
-   cd nextjs-blog
+---
+
+## Setup Instructions
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/manoharportfolio/nextjs-blog
+cd nextjs-blog

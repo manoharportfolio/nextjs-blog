@@ -17,7 +17,9 @@ export default function Admin() {
   const [editing, setEditing] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => { loadPosts(); }, []);
+  useEffect(() => {
+    loadPosts();
+  }, []);
 
   async function loadPosts() {
     setLoading(true);
@@ -35,8 +37,12 @@ export default function Admin() {
       title: postForm.title,
       description: postForm.description,
       content: postForm.content,
-      tags: postForm.tags ? postForm.tags.split(",").map(t => t.trim()).filter(Boolean) : [],
-      images: postForm.images ? postForm.images.split(",").map(i => i.trim()).filter(Boolean) : []
+      tags: postForm.tags
+        ? postForm.tags.split(",").map(t => t.trim()).filter(Boolean)
+        : [],
+      images: postForm.images
+        ? postForm.images.split(",").map(i => i.trim()).filter(Boolean)
+        : []
     };
 
     try {
@@ -72,21 +78,41 @@ export default function Admin() {
   }
 
   return (
-    <div>
+    <div className="admin-container">
       <h2>{editing ? `Editing: ${editing.title}` : "Create a new post"}</h2>
 
       <div style={{ marginBottom: 12 }}>
-        <input placeholder="Title" value={postForm.title} onChange={e => setField("title", e.target.value)} style={{ width: "100%", padding: 8, marginBottom: 8 }} />
-        <input placeholder="Short description" value={postForm.description} onChange={e => setField("description", e.target.value)} style={{ width: "100%", padding: 8, marginBottom: 8 }} />
+        <input
+          placeholder="Title"
+          value={postForm.title}
+          onChange={e => setField("title", e.target.value)}
+        />
+        <input
+          placeholder="Short description"
+          value={postForm.description}
+          onChange={e => setField("description", e.target.value)}
+        />
         <label style={{ display: "block", marginBottom: 6 }}>Content</label>
-        <Editor value={postForm.content} onChange={(val) => setField("content", val)} />
-        <input placeholder="tags comma separated" value={postForm.tags} onChange={e => setField("tags", e.target.value)} style={{ width: "100%", padding: 8, marginTop: 8 }} />
-        <input placeholder="images (comma separated urls)" value={postForm.images} onChange={e => setField("images", e.target.value)} style={{ width: "100%", padding: 8, marginTop: 8 }} />
+        <Editor value={postForm.content} onChange={val => setField("content", val)} />
+        <input
+          placeholder="tags comma separated"
+          value={postForm.tags}
+          onChange={e => setField("tags", e.target.value)}
+        />
+        <input
+          placeholder="images (comma separated URLs)"
+          value={postForm.images}
+          onChange={e => setField("images", e.target.value)}
+        />
       </div>
 
       <div style={{ marginBottom: 12 }}>
         <button onClick={submit}>{editing ? "Update" : "Create"}</button>
-        {editing && <button style={{ marginLeft: 8 }} onClick={() => { setEditing(null); setPostForm(blank); }}>Cancel</button>}
+        {editing && (
+          <button style={{ marginLeft: 8 }} onClick={() => { setEditing(null); setPostForm(blank); }}>
+            Cancel
+          </button>
+        )}
       </div>
 
       <hr />
@@ -96,12 +122,18 @@ export default function Admin() {
         <div>
           {posts.length === 0 && <div>No posts yet.</div>}
           {posts.map(p => (
-            <div key={p._id} style={{ border: "1px solid #eee", padding: 8, marginBottom: 8 }}>
+            <div key={p._id} style={{
+              border: "1px solid #eee",
+              padding: 12,
+              marginBottom: 8,
+              borderRadius: 6,
+              backgroundColor: "#fafafa"
+            }}>
               <strong>{p.title}</strong> <span style={{ color: "#666" }}>({new Date(p.publishDate).toLocaleDateString()})</span>
               <div style={{ marginTop: 8 }}>
                 <button onClick={() => editPost(p)}>Edit</button>
                 <button style={{ marginLeft: 8 }} onClick={() => delPost(p)}>Delete</button>
-                <a style={{ marginLeft: 8 }} href={`/blog/${p.slug}`} target="_blank" rel="noreferrer">View</a>
+                <a style={{ marginLeft: 8, color: "#0070f3" }} href={`/blog/${p.slug}`} target="_blank" rel="noreferrer">View</a>
               </div>
             </div>
           ))}
